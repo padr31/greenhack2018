@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".SquirrelApp"
@@ -24,8 +25,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
-        <service android:name=".gps.LocationTrackingService"/>
-
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -38,6 +37,9 @@
             android:exported="true"
             android:parentActivityName=".ui.activity.MainActivity"
             />
+        <activity android:name=".ui.activity.CameraViewActivity"/>
+
+        <service android:name=".gps.LocationTrackingService"/>
     </application>
 
 </manifest>

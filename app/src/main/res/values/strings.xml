@@ -7,5 +7,6 @@
     <string name="btn_plant">Plant</string>
     <string name="unknown_location">Location unknown, turn on GPS or try later</string>
     <string name="plant_tree">Plant tree</string>
+    <string name="ar">AR</string>
 
 </resources>

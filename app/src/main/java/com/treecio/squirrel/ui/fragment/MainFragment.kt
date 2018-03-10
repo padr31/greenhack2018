@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.*
 import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
 import com.treecio.squirrel.model.PlantedTree
+import com.treecio.squirrel.model.TreeData
+import com.treecio.squirrel.ui.activity.CameraViewActivity
 import com.treecio.squirrel.ui.activity.PlantActivity
 import com.treecio.squirrel.util.runOnMainThread
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -57,10 +59,11 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
     }
 
     private fun setupWidgets(view: View) {
-        val btn = view.btn_plant_tree
-        btn.setOnClickListener {
-            val intent = Intent(context, PlantActivity::class.java)
-            context.startActivity(intent)
+        view.btn_plant_tree.setOnClickListener {
+            context.startActivity(Intent(context, PlantActivity::class.java))
+        }
+        view.btn_ar.setOnClickListener {
+            context.startActivity(Intent(context, CameraViewActivity::class.java))
         }
     }
 
@@ -69,6 +72,7 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         mMapView.onResume()
 
         client.sendFetchRequest { response ->
+            TreeData.forest = response.trees
             setData(response.trees.orEmpty())
         }
     }

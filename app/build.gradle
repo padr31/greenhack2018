@@ -57,6 +57,8 @@ dependencies {
 
     // Google Play Services
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.android.gms:play-services:11.8.0'
 
     // MultiDex
     implementation 'com.android.support:multidex:1.0.3'
