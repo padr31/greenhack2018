@@ -93,9 +93,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.5.2 (sftp://root@167.99.82.66:22/root/myproject/myprojectenv/bin/python3)" project-jdk-type="Python SDK" />
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>

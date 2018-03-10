@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Pali\StudioProjects\greenhack2018\Squirrel.iml" filepath="C:\Users\Pali\StudioProjects\greenhack2018\Squirrel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../Pali/StudioProjects/greenhack2018/Squirrel.iml" filepath="$PROJECT_DIR$/../../../Pali/StudioProjects/greenhack2018/Squirrel.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/greenhack2018.iml" filepath="$PROJECT_DIR$/greenhack2018.iml" />
-      <module fileurl="file://C:\Users\jjurm\workspace\Squirrel\.idea\greenhack2018.iml" filepath="C:\Users\jjurm\workspace\Squirrel\.idea\greenhack2018.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../jjurm/workspace/Squirrel/.idea/greenhack2018.iml" filepath="$PROJECT_DIR$/../../../jjurm/workspace/Squirrel/.idea/greenhack2018.iml" />
     </modules>
   </component>
 </project>
