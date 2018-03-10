@@ -74,10 +74,10 @@ class PlantFragment : BaseFragment() {
         val story = txt_story.text.toString()
         val type = selected
 
-        val lat = location.latitude + (Math.random() - 1.0 / 2) / 1000.0
-        val lon = location.longitude + (Math.random() - 1.0 / 2) / 1000.0
+        val lat = location.latitude + (Math.random() - 1.0 / 2) / 10000.0
+        val lon = location.longitude + (Math.random() - 1.0 / 2) / 10000.0
 
-        val plantedTree = PlantedTree(name = name, story = story, treetype = type, time = System.currentTimeMillis(), lat = location.latitude, lon = location.longitude)
+        val plantedTree = PlantedTree(name = name, story = story, treetype = type, time = System.currentTimeMillis(), lat = lat, lon = lon)
         TreeData.forest.add(plantedTree)
         networkClient.plant(plantedTree)
 
