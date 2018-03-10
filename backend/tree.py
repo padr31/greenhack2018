@@ -1,10 +1,8 @@
 class Tree:
-    def __init__(self, name, story, time, lat, lon):
+    def __init__(self, id, name, story, time, lat, lon):
+        self.id = id
         self.name = name
         self.story = story
         self.time = time
         self.lat = lat
         self.lon = lon
-
-    def tolist(self):
-        return {"name": self.name, "story": self.story, "time": self.time, "lat": self.lat, "lon": self.lon}

@@ -7,7 +7,7 @@ from threading import Thread
 
 
 app = Flask(__name__, static_url_path='')
-treelist = [Tree("name", "story", 1261516661, 10, 20)]
+treelist = [Tree("3baab066-cd57-41d0-9f4e-e05506176105", "name", "story", 1261516661, 10, 20)]
 
 
 @app.route('/')
@@ -26,7 +26,7 @@ def plant():
 
 @app.route('/forest')
 def getlist():
-    return json.dumps({"trees": [tree.tolist() for tree in treelist]})
+    return json.dumps({"trees": [tree.__dict__ for tree in treelist]})
 
 
 @app.after_request
