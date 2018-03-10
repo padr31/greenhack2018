@@ -10,10 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
 import com.treecio.squirrel.model.PlantedTree
@@ -21,6 +18,14 @@ import com.treecio.squirrel.ui.activity.PlantActivity
 import com.treecio.squirrel.util.runOnMainThread
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import timber.log.Timber
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.support.v4.content.ContextCompat
+import android.graphics.drawable.Drawable
+import android.support.annotation.DrawableRes
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.treecio.squirrel.model.TreeType
 
 
 class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -143,6 +148,16 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
                 .position(coordinates)
                 .title(tree.name))
         marker.tag = tree.id
+        marker.setIcon(getMarkerIconFromDrawable(resources.getDrawable(TreeType.values().get(tree.treetype).fileName)))
+    }
+
+    private fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
+        val canvas = Canvas()
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        canvas.setBitmap(bitmap)
+        drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        drawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     override fun onMarkerClick(p0: Marker?): Boolean {

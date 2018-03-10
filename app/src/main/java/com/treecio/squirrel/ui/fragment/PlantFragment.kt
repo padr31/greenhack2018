@@ -16,6 +16,7 @@ import com.treecio.squirrel.gps.LocationTrackingService
 import com.treecio.squirrel.model.PlantedTree
 import kotlinx.android.synthetic.main.fragment_plant.view.*
 import android.widget.AdapterView.OnItemClickListener
+import com.treecio.squirrel.model.TreeType
 
 private val networkClient = NetworkClient()
 
@@ -23,10 +24,11 @@ class PlantFragment : BaseFragment() {
     var mService: LocationTrackingService? = null
     var mBound = false
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+    var selected: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,7 +43,13 @@ class PlantFragment : BaseFragment() {
         gridview.adapter = ImageAdapter(this.context)
 
         gridview.onItemClickListener = OnItemClickListener { parent, v, position, id ->
-            gridview.setItemChecked(position, true);
+            if(gridview.isItemChecked(position)) {
+                gridview.setItemChecked(position, false)
+            }
+            else {
+                gridview.setItemChecked(position, true)
+                selected = position
+            }
         }
 
         return view
@@ -62,26 +70,26 @@ class PlantFragment : BaseFragment() {
 
         val name = txt_name.text.toString()
         val story = txt_story.text.toString()
-        val plantedTree = PlantedTree(name = name, story = story, time = System.currentTimeMillis(), lat = location.latitude, lon = location.longitude)
+        val type = selected
+
+        val plantedTree = PlantedTree(name = name, story = story, treetype = type, time = System.currentTimeMillis(), lat = location.latitude, lon = location.longitude)
         networkClient.plant(plantedTree)
 
     }
 
     inner class ImageAdapter(private val mContext: Context) : BaseAdapter() {
 
-        // references to our images
-        private val mThumbIds = arrayOf<Int>(R.drawable.ic_fruit, R.drawable.ic_pine, R.drawable.ic_leave, R.drawable.ic_tree, R.drawable.ic_tulip, R.drawable.ic_palm)
 
         override fun getCount(): Int {
-            return mThumbIds.size
+            return TreeType.values().size
         }
 
         override fun getItem(position: Int): Any? {
-            return mThumbIds.get(position)
+            return TreeType.values().get(position)
         }
 
         override fun getItemId(position: Int): Long {
-            return position.toLong()
+            return TreeType.values()[position].ordinal.toLong()
         }
 
         // create a new ImageView for each item referenced by the Adapter
@@ -98,7 +106,7 @@ class PlantFragment : BaseFragment() {
                 imageView = (convertView as ImageView?)!!
             }
 
-            imageView.setImageResource(mThumbIds[position])
+            imageView.setImageResource(TreeType.values().get(position).fileName)
 
             return imageView
         }
