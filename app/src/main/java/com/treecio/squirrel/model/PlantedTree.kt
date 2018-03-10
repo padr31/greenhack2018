@@ -1,4 +1,4 @@
-package com.treecio.squirrel.squirrel.model
+package com.treecio.squirrel.model
 
 class PlantedTree (
         val name: String,

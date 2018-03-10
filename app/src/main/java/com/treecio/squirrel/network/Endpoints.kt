@@ -1,7 +1,7 @@
-package com.treecio.squirrel.squirrel.network
+package com.treecio.squirrel.network
 
 import com.google.api.client.http.GenericUrl
-import com.treecio.squirrel.squirrel.network.Endpoints.HOST
+import com.treecio.squirrel.network.Endpoints.HOST
 
 object Endpoints {
 

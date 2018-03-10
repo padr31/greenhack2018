@@ -1,4 +1,4 @@
-package com.treecio.squirrel.squirrel.network.request.abs
+package com.treecio.squirrel.network.request.abs
 
 import android.content.Context
 import android.os.Handler
@@ -9,10 +9,10 @@ import com.google.api.client.http.HttpResponseException
 import com.google.api.client.http.apache.ApacheHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest
-import com.treecio.squirrel.squirrel.network.Endpoint
-import com.treecio.squirrel.squirrel.network.RequestMethod
-import com.treecio.squirrel.squirrel.network.UnparsableResponseException
-import com.treecio.squirrel.squirrel.network.model.abs.JsonObject
+import com.treecio.squirrel.network.Endpoint
+import com.treecio.squirrel.network.RequestMethod
+import com.treecio.squirrel.network.UnparsableResponseException
+import com.treecio.squirrel.network.model.abs.JsonObject
 import timber.log.Timber
 import java.io.IOException
 import java.util.*

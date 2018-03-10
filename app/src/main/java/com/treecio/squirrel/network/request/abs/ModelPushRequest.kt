@@ -1,14 +1,14 @@
-package com.treecio.squirrel.squirrel.network.request.abs
+package com.treecio.squirrel.network.request.abs
 
 import android.content.Context
 import com.google.api.client.http.HttpRequest
 import com.google.api.client.http.HttpResponseException
 import com.google.api.client.http.json.JsonHttpContent
 import com.google.api.client.json.jackson2.JacksonFactory
-import com.treecio.squirrel.squirrel.network.Endpoint
-import com.treecio.squirrel.squirrel.network.RequestMethod
-import com.treecio.squirrel.squirrel.network.model.abs.JsonModel
-import com.treecio.squirrel.squirrel.network.model.abs.JsonObject
+import com.treecio.squirrel.network.Endpoint
+import com.treecio.squirrel.network.RequestMethod
+import com.treecio.squirrel.network.model.abs.JsonModel
+import com.treecio.squirrel.network.model.abs.JsonObject
 
 /**
  * Uses POST method to send an entity of class [Model], expecting a result of class [Response].

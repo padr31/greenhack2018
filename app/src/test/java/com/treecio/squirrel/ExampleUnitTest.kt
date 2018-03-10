@@ -1,4 +1,4 @@
-package com.treecio.squirrel.squirrel
+package com.treecio.squirrel
 
 import org.junit.Test
 

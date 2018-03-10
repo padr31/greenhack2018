@@ -1,4 +1,4 @@
-package com.treecio.squirrel.squirrel.ui.activity
+package com.treecio.squirrel.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

@@ -1,7 +1,8 @@
-package com.treecio.squirrel.squirrel
+package com.treecio.squirrel.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.treecio.squirrel.R
 
 class MainActivity : AppCompatActivity() {
 

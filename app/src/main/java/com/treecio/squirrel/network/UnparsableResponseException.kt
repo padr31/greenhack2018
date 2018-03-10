@@ -1,4 +1,4 @@
-package com.treecio.squirrel.squirrel.network
+package com.treecio.squirrel.network
 
 import java.io.IOException
 
