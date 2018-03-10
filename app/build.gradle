@@ -38,6 +38,23 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.1.1'
 
+    // jackson-module-kotlin
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1'
 
+    // RoboSpice
+    implementation 'com.octo.android.robospice:robospice-google-http-client:1.4.14'
+    // Google HTTP Client Library for Java + Jackson2 extension
+    implementation('com.google.http-client:google-http-client-jackson2:1.22.0') {
+        exclude module: 'xpp3'
+        exclude group: 'stax'
+        exclude group: 'com.google.android'
+    }
+
+    // Stetho
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-js-rhino:1.5.0'
+
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
 
 }
