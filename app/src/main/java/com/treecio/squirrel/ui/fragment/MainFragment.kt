@@ -3,6 +3,9 @@ package com.treecio.squirrel.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.location.Criteria
 import android.location.LocationManager
 import android.os.Bundle
@@ -15,19 +18,13 @@ import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
 import com.treecio.squirrel.model.PlantedTree
 import com.treecio.squirrel.model.TreeData
+import com.treecio.squirrel.model.TreeType
 import com.treecio.squirrel.ui.activity.CameraViewActivity
+import com.treecio.squirrel.ui.activity.DetailActivity
 import com.treecio.squirrel.ui.activity.PlantActivity
 import com.treecio.squirrel.util.runOnMainThread
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import timber.log.Timber
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.support.v4.content.ContextCompat
-import android.graphics.drawable.Drawable
-import android.support.annotation.DrawableRes
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.treecio.squirrel.model.TreeType
 
 
 class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -72,8 +69,8 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         mMapView.onResume()
 
         client.sendFetchRequest { response ->
-            TreeData.forest = response.trees
-            setData(response.trees.orEmpty())
+            TreeData.forest.addAll(response.trees.orEmpty())
+            setData(TreeData.forest)
         }
     }
 
@@ -168,6 +165,18 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         /*val resultIntent = Intent(context, DetailActivity::class.java)
         resultIntent.putExtras(DetailActivity.Companion.getArguments(circle.tag as String?))
         context.startActivity(resultIntent)*/
+        val treeid = p0?.tag as String?
+        /*val tree = treeid?.let { TreeData.forest.orEmpty().firstOrNull { it.id == treeid } }
+        if (tree == null) {
+            Toast.makeText(context, "Tree is null", Toast.LENGTH_SHORT).show()
+        } else {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_TREE_ID, tree.id)
+            context.startActivity(intent)
+        }*/
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_TREE_ID, treeid)
+        context.startActivity(intent)
         return true
     }
 }

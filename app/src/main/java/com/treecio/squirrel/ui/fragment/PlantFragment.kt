@@ -8,15 +8,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.Toast
 import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
-import kotlinx.android.synthetic.main.fragment_plant.*
 import com.treecio.squirrel.gps.LocationTrackingService
 import com.treecio.squirrel.model.PlantedTree
-import kotlinx.android.synthetic.main.fragment_plant.view.*
-import android.widget.AdapterView.OnItemClickListener
+import com.treecio.squirrel.model.TreeData
 import com.treecio.squirrel.model.TreeType
+import kotlinx.android.synthetic.main.fragment_plant.*
+import kotlinx.android.synthetic.main.fragment_plant.view.*
 
 private val networkClient = NetworkClient()
 
@@ -43,10 +46,9 @@ class PlantFragment : BaseFragment() {
         gridview.adapter = ImageAdapter(this.context)
 
         gridview.onItemClickListener = OnItemClickListener { parent, v, position, id ->
-            if(gridview.isItemChecked(position)) {
+            if (gridview.isItemChecked(position)) {
                 gridview.setItemChecked(position, false)
-            }
-            else {
+            } else {
                 gridview.setItemChecked(position, true)
                 selected = position
             }
@@ -72,8 +74,14 @@ class PlantFragment : BaseFragment() {
         val story = txt_story.text.toString()
         val type = selected
 
+        val lat = location.latitude + (Math.random() - 1.0 / 2) / 1000.0
+        val lon = location.longitude + (Math.random() - 1.0 / 2) / 1000.0
+
         val plantedTree = PlantedTree(name = name, story = story, treetype = type, time = System.currentTimeMillis(), lat = location.latitude, lon = location.longitude)
+        TreeData.forest.add(plantedTree)
         networkClient.plant(plantedTree)
+
+        activity.finish()
 
     }
 
