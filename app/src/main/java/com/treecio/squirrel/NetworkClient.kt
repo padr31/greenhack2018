@@ -14,7 +14,7 @@ class NetworkClient {
 
         val JSON = MediaType.parse("application/json; charset=utf-8")
 
-        val BASE_ENDPOINT = "http://localhost:5000"
+        val BASE_ENDPOINT = "http://167.99.82.66:5000"
         val ENDPOINT_FOREST = BASE_ENDPOINT + "/forest"
         val ENDPOINT_PLANT = BASE_ENDPOINT + "/plant"
 
@@ -36,7 +36,9 @@ class NetworkClient {
             }
 
             override fun onResponse(call: Call?, response: Response) {
-                val obj = gson.fromJson(response.body()?.toString(), clazz)
+                val responseString = response.body()?.string()
+                Timber.i("Response: " + responseString)
+                val obj = gson.fromJson(responseString, clazz)
                 handler.invoke(obj)
             }
 

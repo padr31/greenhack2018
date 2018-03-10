@@ -18,6 +18,7 @@ import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
 import com.treecio.squirrel.model.PlantedTree
 import com.treecio.squirrel.ui.activity.PlantActivity
+import com.treecio.squirrel.util.runOnMainThread
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import timber.log.Timber
 
@@ -28,7 +29,7 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
 
     lateinit var mMapView: MapView
     private var map: GoogleMap? = null
-    private var forest: Collection<PlantedTree>? = null
+    private var forestToDisplay: Collection<PlantedTree>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -85,12 +86,10 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
     fun setData(trees: Collection<PlantedTree>) {
         Timber.i("Got ${trees.size} trees")
         if (!isAdded) {
-            this.forest = trees
+            this.forestToDisplay = trees
         } else {
-            this.forest = null
-            for (tree in trees) {
-                showTree(tree)
-            }
+            this.forestToDisplay = null
+            showForest(trees)
         }
     }
 
@@ -121,15 +120,23 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         // Set retro style Google Maps
         //mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_json))
 
+        val forest = forestToDisplay
         if (forest != null) {
-            for (tree in forest!!) {
+            showForest(forest)
+            forestToDisplay = null
+        }
+    }
+
+    private fun showForest(trees: Collection<PlantedTree>) {
+        context.runOnMainThread {
+            for (tree in trees) {
                 showTree(tree)
             }
-            forest = null
         }
     }
 
     private fun showTree(tree: PlantedTree) {
+        Timber.d("Showing tree")
         val coordinates = LatLng(tree.lat, tree.lon)
 
         val marker = map!!.addMarker(MarkerOptions()
