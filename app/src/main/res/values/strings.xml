@@ -5,5 +5,7 @@
     <string name="tree_name">Name of your tree</string>
     <string name="tree_story">The story of this new buddy</string>
     <string name="btn_plant">Plant</string>
+    <string name="unknown_location">Location unknown, turn on GPS or try later</string>
     <string name="plant_tree">Plant tree</string>
+
 </resources>
