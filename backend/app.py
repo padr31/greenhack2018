@@ -17,7 +17,7 @@ def index():
 
 @app.route('/plant', methods=["POST"])
 def plant():
-    body = json.loads(request.data)
+    body = json.loads(request.data.decode('utf-8'))
     tree = Tree(body["name"], body["story"], body["time"], body["lat"], body["lon"])
     treelist.append(tree)
 
