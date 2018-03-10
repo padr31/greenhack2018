@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Squirrel</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tree_name">Name of your tree</string>
+    <string name="tree_story">The story of this new buddy</string>
+    <string name="btn_plant">Plant</string>
 </resources>
