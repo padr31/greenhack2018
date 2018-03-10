@@ -3,8 +3,6 @@ from flask import Flask, send_file, request
 import json
 from tree import Tree
 
-from threading import Thread
-
 
 app = Flask(__name__, static_url_path='')
 treelist = [Tree("3baab066-cd57-41d0-9f4e-e05506176105", "name", "story", 1261516661, 10, 20)]
@@ -18,7 +16,7 @@ def index():
 @app.route('/plant', methods=["POST"])
 def plant():
     body = json.loads(request.data.decode('utf-8'))
-    tree = Tree(body["name"], body["story"], body["time"], body["lat"], body["lon"])
+    tree = Tree(**body)
     treelist.append(tree)
 
     return json.dumps({})
