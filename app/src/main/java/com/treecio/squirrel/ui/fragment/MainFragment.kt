@@ -3,7 +3,6 @@ package com.treecio.squirrel.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.location.Criteria
 import android.location.LocationManager
 import android.os.Bundle
@@ -12,24 +11,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import com.treecio.squirrel.NetworkClient
 import com.treecio.squirrel.R
 import com.treecio.squirrel.model.PlantedTree
 import com.treecio.squirrel.ui.activity.PlantActivity
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import timber.log.Timber
 
 
-class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClickListener {
+class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
+    val client = NetworkClient()
 
     lateinit var mMapView: MapView
     private var map: GoogleMap? = null
     private var forest: Collection<PlantedTree>? = null
-
-    private var color: Int = 0
-    private val radius: Long = 0
-    private var coordinates: LatLng? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,7 +47,6 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClick
         mMapView.getMapAsync(this)
 
         setupWidgets(rootView)
-
         return rootView
     }
 
@@ -60,19 +58,13 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClick
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        //DataHolder.INSTANCE.getPerformanceListeners().add(this)
-    }
-
-    override fun onStop() {
-        //DataHolder.INSTANCE.getPerformanceListeners().remove(this)
-        super.onStop()
-    }
-
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
+
+        client.sendFetchRequest { response ->
+            setData(response.trees.orEmpty())
+        }
     }
 
     override fun onPause() {
@@ -91,6 +83,7 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClick
     }
 
     fun setData(trees: Collection<PlantedTree>) {
+        Timber.i("Got ${trees.size} trees")
         if (!isAdded) {
             this.forest = trees
         } else {
@@ -108,7 +101,7 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClick
         // For showing a move to my location button
         map!!.isMyLocationEnabled = true
 
-        map!!.setOnCircleClickListener(this)
+        map!!.setOnMarkerClickListener(this)
 
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val criteria = Criteria()
@@ -136,25 +129,19 @@ class MainFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCircleClick
         }
     }
 
-    fun showTree(tree: PlantedTree) {
-        color = Color.GREEN
-        coordinates = LatLng(tree.lat, tree.lon)
+    private fun showTree(tree: PlantedTree) {
+        val coordinates = LatLng(tree.lat, tree.lon)
 
-        val circle = map!!.addCircle(CircleOptions()
-                .center(coordinates)
-                .radius(20.0)
-                .strokeColor(color)
-                .strokeWidth(5f)
-                .fillColor(color)
-        )
-        circle.tag = tree.id
-        //circle.isClickable = true
+        val marker = map!!.addMarker(MarkerOptions()
+                .position(coordinates)
+                .title(tree.name))
+        marker.tag = tree.id
     }
 
-    override fun onCircleClick(circle: Circle) {
+    override fun onMarkerClick(p0: Marker?): Boolean {
         /*val resultIntent = Intent(context, DetailActivity::class.java)
         resultIntent.putExtras(DetailActivity.Companion.getArguments(circle.tag as String?))
         context.startActivity(resultIntent)*/
+        return true
     }
-
 }
