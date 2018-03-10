@@ -7,7 +7,7 @@ from threading import Thread
 
 
 app = Flask(__name__, static_url_path='')
-treelist = []
+treelist = [Tree("name", "story", 1261516661, 10, 20)]
 
 
 @app.route('/')
