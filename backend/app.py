@@ -13,7 +13,7 @@ SECRET_KEY = 'development key'
 DEBUG = True
 
 app = Flask(__name__, static_url_path='')
-#treelist = [Tree("3baab066-cd57-41d0-9f4e-e05506176105", "name", "story", 1261516661, 10, 20, 0)]
+treelist = []#Tree("3baab066-cd57-41d0-9f4e-e05506176105", "name", "story", 1261516661, 10, 20, 0)]
 
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
