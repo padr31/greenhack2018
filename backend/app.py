@@ -24,7 +24,7 @@ def plant():
     return json.dumps({})
 
 
-@app.route('/list')
+@app.route('/forest')
 def getlist():
     return json.dumps({"trees": [tree.tolist() for tree in treelist]})
 
