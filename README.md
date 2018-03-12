@@ -6,12 +6,11 @@ Squirrel is an android app created during Green Hack 2018 at Cambridge. The purp
 - You can plant a tree in real life, and then tap plant tree in the app.
 - A screen will appear where one can name the tree, give it a story, and choose from basic types.
 
-![](https://i.imgur.com/Dr2TZdp.png =250x) ![](https://i.imgur.com/cGEcLoV.png =250x)
+<img src="https://i.imgur.com/Dr2TZdp.png" width="250"/> <img src="https://i.imgur.com/cGEcLoV.png" width="250"/>
 
 - After planting the tree, it will appear publicly in a map where everyone can see information about the trees nearby.
 
-![](https://i.imgur.com/HIcGgFA.png =250x)
-
+<img src="https://i.imgur.com/HIcGgFA.png" width="250"/>
 
 ## How did we build it?
 
